@@ -18,7 +18,7 @@ class CreatePlanesTable extends Migration
             $table->integer('brand_id')->unsigned();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->integer('qty_passengers');
-            $table->enun('class', ['economic','luxury'])
+            $table->enum('class', ['economic','luxury']);
             $table->timestamps();
         });
     }
