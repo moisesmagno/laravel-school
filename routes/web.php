@@ -1,7 +1,8 @@
 <?php
 
+//PANEL
 $this->get('panel', 'Panel\PanelController@index');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//SITE
+$this->get('/', 'Site\SiteController@index')->name('home');
+$this->get('promocoes', 'Site\SiteController@promotions')->name('promotions');
