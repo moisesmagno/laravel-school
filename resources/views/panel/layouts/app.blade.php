@@ -34,16 +34,9 @@
             </li>
 
             <li>
-                <a href="?pag=list">
-                    <i class="fa fa-id-card" aria-hidden="true"></i>
-                    Listagem
-                </a>
-            </li>
-
-            <li>
-                <a href="?pag=forms">
-                    <i class="fa fa-fort-awesome" aria-hidden="true"></i>
-                    Forms
+                <a href="{{ route('brands.index') }}">
+                    <i class="fa fa-university" aria-hidden="true"></i>
+                    Marcas
                 </a>
             </li>
         </ul>

@@ -1,7 +1,10 @@
 <?php
 
-//PANEL
-$this->get('panel', 'Panel\PanelController@index');
+//DASHBOAD GROUP OF ROUTS
+$this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
+    $this->get('/', 'PanelController@index');
+    $this->resource('brands', 'BrandController');
+});
 
 //SITE
 $this->get('/', 'Site\SiteController@index')->name('home');
