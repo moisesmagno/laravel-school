@@ -14,7 +14,8 @@ class BrandController extends Controller
      */
     public function index()
     {
-        return 'Estou na index';
+        $title = 'Marcas de aviões';
+        return view('panel.brands.index', compact('title'));
     }
 
     /**
@@ -24,7 +25,8 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        $title = 'Criar marca de avião';
+        return view('panel.brands.create', compact('title'));
     }
 
     /**
