@@ -3,8 +3,7 @@
 @section('content')
 
     <div class="bred">
-        <a href="" class="bred">Home</a>
-        <a href="" class="bred">Marcas</a>
+        <a href="#" class="bred">Home</a>
     </div>
 
     <div class="title-pg">
