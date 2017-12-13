@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Http\Requests\BrandStoreUpdateFormRequest;
 
 class BrandController extends Controller
 {
@@ -37,7 +38,7 @@ class BrandController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Brand $brand)
+    public function store(BrandStoreUpdateFormRequest $request, Brand $brand)
     {
         $dataForm = $request->all();
 
