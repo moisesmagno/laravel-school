@@ -9,15 +9,23 @@ use App\Http\Requests\BrandStoreUpdateFormRequest;
 
 class BrandController extends Controller
 {
+
+    private $brand;
+
+    public function __construct(Brand $brand)
+    {
+        $this->brand = $brand;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Brand $brand)
+    public function index()
     {
         $title = 'Marcas de aviões';
-        $brands = $brand->all();
+        $brands = $this->brand->all();
         return view('panel.brands.index', compact('title','brands'));
     }
 
@@ -42,12 +50,16 @@ class BrandController extends Controller
     {
         $dataForm = $request->all();
 
-        $insert = $brand->create($dataForm);
+        $insert = $this->brand->create($dataForm);
 
         if($insert)
-            return redirect()->route('brands.index');
+            return redirect()
+                        ->route('brands.index')
+                        ->with('success', 'Cadastro realizado com sucesso!');
         else
-            return redirect()->back()->with('error', 'Falha ao cadastrar Marca!');
+            return redirect()
+                        ->back()
+                        ->with('error', 'Falha ao cadastrar Marca!');
     }
 
     /**
@@ -69,7 +81,14 @@ class BrandController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brand = $this->brand->find($id);
+
+        if(!$brand)
+            return redirect()->back();
+
+        $title = "Editar Marca: " . $brand->name;
+
+        return view('panel.brands.edit', compact('title', 'brand'));
     }
 
     /**
@@ -81,7 +100,22 @@ class BrandController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $brand = $this->brand->find($id);
+
+        if(!$brand)
+            return redirect()->back();
+
+        $update = $brand->update($request->all());
+
+        if($update)
+            return redirect()
+                    ->route('brands.index')
+                    ->with('success', 'Marca atualizada com sucesso!');
+        else
+            return redirect()
+                ->route('brands.index')
+                        ->with('error', 'Nâo foi atualizar editar a marca!');
     }
 
     /**
