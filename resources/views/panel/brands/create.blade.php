@@ -29,7 +29,7 @@
             {!! csrf_field() !!}
 
             <div class="form-group">
-                <input type="text" name="name" placeholder="Nome:" class="form-control">
+                <input type="text" value="{{ old('name') }}" name="name" placeholder="Nome:" class="form-control">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn btn-search">Cadastrar</button>

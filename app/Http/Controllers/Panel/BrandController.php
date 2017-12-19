@@ -37,7 +37,7 @@ class BrandController extends Controller
     public function create()
     {
         $title = 'Criar marca de avião';
-        return view('panel.brands.create', compact('title'));
+        return view('panel.brands.create-edit', compact('title'));
     }
 
     /**
@@ -88,7 +88,7 @@ class BrandController extends Controller
 
         $title = "Editar Marca: " . $brand->name;
 
-        return view('panel.brands.edit', compact('title', 'brand'));
+        return view('panel.brands.create-edit', compact('title', 'brand'));
     }
 
     /**
@@ -98,7 +98,7 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(BrandStoreUpdateFormRequest $request, $id)
     {
 
         $brand = $this->brand->find($id);
