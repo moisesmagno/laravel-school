@@ -2,6 +2,7 @@
 
 //DASHBOAD GROUP OF ROUTS
 $this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
+    $this->any('brands/search', 'BrandController@search')->name('brands.search');
     $this->get('/', 'PanelController@index')->name('homepanel');
     $this->resource('brands', 'BrandController');
 });
