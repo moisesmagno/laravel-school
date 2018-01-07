@@ -18,11 +18,7 @@
             <li>Nome: <strong>{{ $brand->name }}</strong></li>
         </ul>
 
-        @if(session('error'))
-            <div class="alert alert-error">
-                {{ session('error') }}
-            </div>
-        @endif
+        @include('panel.includes.alerts')
 
         {!! Form::open(['route' => ['brands.destroy', $brand->id], 'class' => 'form form-search form-ds', 'method'=>'DELETE']) !!}
         <div class="form-group">
