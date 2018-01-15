@@ -4,6 +4,7 @@
 $this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
     $this->any('brands/search', 'BrandController@search')->name('brands.search');
     $this->resource('planes', 'PlaneController');
+    $this->any('planes/search', 'PlaneController@search')->name('planes.search');
     $this->get('/', 'PanelController@index')->name('homepanel');
     $this->resource('brands', 'BrandController');
 });
