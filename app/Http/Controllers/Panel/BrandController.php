@@ -145,7 +145,7 @@ class BrandController extends Controller
                     ->with('success','Marca excluído com sucesso!');
         else
             return redirect()
-                    ->route('brands.index')
+                    ->back()
                     ->with('error', 'Falha ao excluir a Marca!');
     }
 
@@ -154,5 +154,19 @@ class BrandController extends Controller
         $brands = $this->brand->search($request->key_search, $this->totalPage);
         $title = "Brands, filtros para: {$request->key_search}";
         return view('panel.brands.index', compact('title','brands','dataForm'));
+    }
+
+    public function planes($id){
+
+        $brand = $this->brand->with('planes')->find($id);
+
+        if(!$brand)
+            return redirect()->back();
+
+        $planes = $brand->planes()->get();
+
+        $title = "Aviões da marca: {$brand->name}";
+
+        return view('panel.brands.planes', compact('brand','planes','title'));
     }
 }

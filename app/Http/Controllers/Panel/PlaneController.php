@@ -81,7 +81,16 @@ class PlaneController extends Controller
      */
     public function show($id)
     {
-        //
+        $plane = $this->plane->with('brand')->find($id);
+        if(!$plane)
+            return redirect()->back();
+
+        $brand = $plane->brand->name;
+
+        $title = "Detalhes do avião: {$plane->$id}";
+
+        return view('panel.planes.show',compact('plane','title','brand'));
+
     }
 
     /**
@@ -143,6 +152,18 @@ class PlaneController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $plane = $this->plane->find($id);
+
+        if(!$plane)
+            return redirect()->back();
+
+        if($plane->delete())
+            return redirect()
+                    ->route('planes.index')
+                    ->with('success', 'O avião foi excluído com sucesso!');
+        else
+            return redirect()
+                    ->route('planes.show')
+                    ->with('error', 'Ocorreu um erro ao excluir o avião!');
     }
 }

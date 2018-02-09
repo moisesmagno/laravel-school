@@ -22,6 +22,7 @@ class Plane extends Model
         return $classes[$className];
     }
 
+    //Trás a marca relacionado ao avião
     public function brand()
     {
         return $this->belongsTo(Brand::class);
