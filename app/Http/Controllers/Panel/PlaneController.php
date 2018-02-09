@@ -166,4 +166,15 @@ class PlaneController extends Controller
                     ->route('planes.show')
                     ->with('error', 'Ocorreu um erro ao excluir o avião!');
     }
+
+    public function search(Request $request)
+    {
+        $dataForm = $request->except(['_token']);
+        $keyShearch = $request->key_search;
+        $title = "Resultado de aviões para: {$keyShearch}";
+        $planes = $this->plane->search($keyShearch, $this->totalPage);
+
+        return view('panel.planes.index', compact('title', 'planes', 'dataForm'));
+
+    }
 }
