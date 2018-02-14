@@ -53,6 +53,7 @@
             @forelse($brands as $brand)
             <tr>
                 <td>{{ $brand->name }}</td>
+                <td>{{ $brand->name }}</td>
                 <td>
                     <a href="{{ route('brands.edit', $brand->id) }}" class="edit">Edit</a>
                     <a href="{{ route('brands.show', $brand->id) }}" class="delete">View</a>

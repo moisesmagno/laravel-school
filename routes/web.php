@@ -9,6 +9,10 @@ $this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
     //Planes
     $this->resource('planes', 'PlaneController');
 
+    //States
+    $this->get('states', 'StateController@index')->name('states.index');
+    $this->any('states-search', 'StateController@search')->name('states.search');
+
     //Brands
     $this->resource('brands', 'BrandController');
     $this->any('brands/search', 'BrandController@search')->name('brands.search');
