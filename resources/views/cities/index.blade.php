@@ -4,18 +4,20 @@
 
     <div class="bred">
         <a href="{{ route('homepanel') }}" class="bred">Home > </a>
-        <a href="#" class="bred">States</a>
+        <a href="{{ route('states.index') }}" class="bred">States > </a>
+        <a href="{{ route('state.cities', $state->initials) }}" class="bred">{{ $state->name }} > </a>
+        <a href="#" class="bred">Cidades</a>
     </div>
 
     <div class="title-pg">
-        <h1 class="title-pg">Estados</h1>
+        <h1 class="title-pg">Cidades do estados: <strong>{{ $state->name }}</strong></h1>
     </div>
 
 
     <div class="content-din bg-white">
 
         <div class="form-search">
-            {!! Form::open(['route' => 'states.search', 'class' => 'form form-inline']) !!}
+            {!! Form::open(['route' => 'state.cities.search', 'class' => 'form form-inline']) !!}
             {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Buscar']) !!}
             <button class="btn btn-search">Pesquisar</button>
             {!! Form::close() !!}
@@ -23,7 +25,7 @@
             @if(isset($dataForm['key_search']))
                 <div class="alert alert-info">
                     <p>
-                        <a href="{{ route('states.index') }}">
+                        <a href="{{ route('states.cities.index') }}">
                             <i class="fa fa-refresh" aria-hidden="true"></i>
                         </a>
                         Resultados para: <strong>{{ $dataForm['key_search'] }}</strong>
@@ -40,18 +42,14 @@
 
             <tr>
                 <th>Nome</th>
-                <th>sigla</th>
-                <th width="200">Cidades</th>
+                <th width="200">Ações</th>
             </tr>
 
-            @forelse($states as $state)
+            @forelse($cities as $city)
                 <tr>
-                    <td>{{ $state->name }}</td>
-                    <td>{{ $state->initials }}</td>
+                    <td>{{ $city->name }}</td>
                     <td>
-                        <a href="{{ route('state.cities', $state->initials) }}" class="edit">
-                            <i class="fa fa-map-marker" aria-hidden="true"></i> Cidades
-                        </a>
+                        #ações
                     </td>
                 </tr>
             @empty

@@ -11,7 +11,11 @@ $this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
 
     //States
     $this->get('states', 'StateController@index')->name('states.index');
-    $this->any('states-search', 'StateController@search')->name('states.search');
+    $this->post('states-search', 'StateController@search')->name('states.search');
+
+    //Cities
+    $this->get('state/{initials}/cities', 'CityController@index')->name('state.cities');
+    $this->post('state/{initials}/cities/search', 'CityController@search')->name('state.cities.search');
 
     //Brands
     $this->resource('brands', 'BrandController');

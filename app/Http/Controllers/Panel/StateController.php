@@ -19,4 +19,13 @@ class StateController extends Controller
         $title = "Lista dos estados Brasileiros";
         return view('panel.states.index', compact('states','title'));
     }
+
+    public function search(Request $request){
+
+        $dataForm = $request->all();
+        $keySearch = $request->key_search;
+        $title = "Resultado para: {$keySearch}";
+        $states = $this->state->search($keySearch);
+        return view('panel.states.index', compact('title', 'states', 'dataForm'));
+    }
 }
