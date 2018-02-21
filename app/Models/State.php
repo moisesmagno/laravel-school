@@ -11,4 +11,10 @@ class State extends Model
                     ->orWhere('initials', $keySearch)
                     ->get();
     }
+
+    //Recupera todos as cidades do estado. 
+    //(1 estado para várias cidades)
+    public function cities(){
+    	return $this->hasMany(City::Class);
+    }
 }

@@ -18,13 +18,14 @@ class CityController extends Controller
     }
 
     public function index($initials){
-
+            
         $state = $this->state->where('initials', $initials)->get()->first();
+        dd($state);
         if(!$state)
             return redirect()->back();
 
-        $title = "Cidades do estado: {$state->name}";
+        //$title = "Cidades do estado: {$state->name}";
 
-        return view('panel.cities.index', compact('title',cities ));
+        //return view('panel.cities.index', compact('title'));
     }
 }
