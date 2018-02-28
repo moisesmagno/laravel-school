@@ -10,14 +10,14 @@
     </div>
 
     <div class="title-pg">
-        <h1 class="title-pg">Cidades do estados: <strong>{{ $state->name }}</strong></h1>
+        <h1 class="title-pg">Cidades do estados ({{ $cities->count() }} / {{ $cities->total()}}): <strong>{{ $state->name }}</strong></h1>
     </div>
 
 
     <div class="content-din bg-white">
 
         <div class="form-search">
-            {!! Form::open(['route' => 'state.cities.search', 'class' => 'form form-inline']) !!}
+            {!! Form::open(['route' => ['state.cities.search', $state->initials], 'class' => 'form form-inline']) !!}
             {!! Form::text('key_search', null, ['class' => 'form-control', 'placeholder' => 'Buscar']) !!}
             <button class="btn btn-search">Pesquisar</button>
             {!! Form::close() !!}
@@ -58,6 +58,8 @@
                 </tr>
             @endforelse
         </table>
+
+        {!! $cities->links() !!}
 
     </div><!--Content Dinâmico-->
 

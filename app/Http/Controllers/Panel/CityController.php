@@ -11,6 +11,7 @@ class CityController extends Controller
 {
     protected $state;
     protected $city;
+    private $totalPage = 20;
 
     public function __construct(City $city, State $state){
         $this->city = $city;
@@ -18,14 +19,16 @@ class CityController extends Controller
     }
 
     public function index($initials){
-            
+
         $state = $this->state->where('initials', $initials)->get()->first();
-        dd($state);
+
         if(!$state)
             return redirect()->back();
 
-        //$title = "Cidades do estado: {$state->name}";
+        $cities = $state->cities()->paginate($this->totalPage);
 
-        //return view('panel.cities.index', compact('title'));
+        $title = "Cidades do estado: {$state->name}";
+
+        return view('panel.cities.index', compact('title', 'state', 'cities'));
     }
 }
