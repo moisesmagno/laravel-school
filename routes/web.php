@@ -8,6 +8,7 @@ $this->group(['prefix'=>'panel', 'namespace'=>'Panel'], function(){
 
     //Planes
     $this->resource('planes', 'PlaneController');
+    $this->any('planes/search', 'PlaneController@search')->name('planes.search');
 
     //States
     $this->get('states', 'StateController@index')->name('states.index');
