@@ -13,7 +13,6 @@
         <h1 class="title-pg">Cidades do estados ({{ $cities->count() }} / {{ $cities->total()}}): <strong>{{ $state->name }}</strong></h1>
     </div>
 
-
     <div class="content-din bg-white">
 
         <div class="form-search">
@@ -25,7 +24,7 @@
             @if(isset($dataForm['key_search']))
                 <div class="alert alert-info">
                     <p>
-                        <a href="{{ route('states.cities.index') }}">
+                        <a href="#">
                             <i class="fa fa-refresh" aria-hidden="true"></i>
                         </a>
                         Resultados para: <strong>{{ $dataForm['key_search'] }}</strong>
@@ -59,7 +58,11 @@
             @endforelse
         </table>
 
-        {!! $cities->links() !!}
+        @if(isset($dataForm))
+            {!! $cities->appends($dataForm)->links() !!}
+        @else
+            {!! $cities->links() !!}
+        @endif
 
     </div><!--Content Dinâmico-->
 
