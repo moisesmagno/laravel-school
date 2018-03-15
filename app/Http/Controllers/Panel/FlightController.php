@@ -37,7 +37,8 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Cadastro de Voos";
+        return view('panel.flights.create', compact('title'));
     }
 
     /**
