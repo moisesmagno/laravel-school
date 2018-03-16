@@ -39,12 +39,16 @@
 	{!! Form::text('total_plots', null, ['class'=>'form-control', 'Total de parcelas']) !!}
 </div>
 <div class="form-group">
-	{!! Form::checkbox('is_promotion', null, ['id'=>'is_promotion']) !!}
+	{!! Form::checkbox('is_promotion', null, null, ['id'=>'is_promotion']) !!}
 	<label for="is_promotion">É promoção</label>
 </div>
 <div class="form-group">
 	<label for="image">Foto</label>
-	{!! Form::image('total_plots', null, ['class'=>'form-control']) !!}
+	{!! Form::file('image', ['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
+	<label for="qty_stops">Quantidade de paradas</label>
+	{!! Form::number('qty_stops', null, ['class'=>'form-control','placeholder'=>'Quantidade de paradas']) !!}
 </div>
 <div class="form-group">
 	<label for="description">Descrição</label>

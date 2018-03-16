@@ -5,15 +5,21 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
+use App\Models\Aiport;
+use App\Models\Plane;
 
 class FlightController extends Controller
 {
     private $flight;
+    private $aiport;
+    private $plane;
     private $totalPaginate = 20;
 
-    public function __construct(Flight $flight)
+    public function __construct(Flight $flight, Aiport $aiport, Plane $plane)
     {
         $this->flight = $flight;
+        $this->aiport = $aiport;
+        $this->plane = $plane;
     }
 
     /**
@@ -38,7 +44,11 @@ class FlightController extends Controller
     public function create()
     {
         $title = "Cadastro de Voos";
-        return view('panel.flights.create', compact('title'));
+
+        $planes = $this->plane->pluck('id', 'id');
+        $aiports = $this->aiport->pluck('name', 'id');
+
+        // return view('panel.flights.create', compact('title', 'planes', 'aiports'));
     }
 
     /**
