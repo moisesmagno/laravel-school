@@ -57,12 +57,12 @@
 
             @forelse($flights as $flight)
                 <tr>
-                    <td>{{ $brand->id }}</td>
-                    <td>{{ $brand->aiport_origin_id }}</td>
-                    <td>{{ $brand->aiport_destination_id }}</td>
-                    <td>{{ $brand->qty_stops }}</td>
-                    <td>{{ $brand->date }}</td>
-                    <td>{{ $brand->hour_output }}</td>
+                    <td>{{ $flight->id }}</td>
+                    <td>{{ $flight->aiport_origin_id }}</td>
+                    <td>{{ $flight->aiport_destination_id }}</td>
+                    <td>{{ $flight->qty_stops }}</td>
+                    <td>{{ $flight->date }}</td>
+                    <td>{{ $flight->hour_output }}</td>
                     <td>
                         <a href="{{ route('flights.edit', $flight->id) }}" class="edit">Edit</a>
                         <a href="{{ route('flights.show', $flight->id) }}" class="delete">View</a>

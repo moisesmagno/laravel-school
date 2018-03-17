@@ -48,7 +48,7 @@ class FlightController extends Controller
         $planes = $this->plane->pluck('id', 'id');
         $aiports = $this->aiport->pluck('name', 'id');
 
-        // return view('panel.flights.create', compact('title', 'planes', 'aiports'));
+        return view('panel.flights.create', compact('title', 'planes', 'aiports'));
     }
 
     /**
@@ -59,7 +59,14 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($this->flight->newFlight($request))
+            return redirect()
+                        ->route('flights.index')
+                        ->with('success', 'Cadastro realizado com sucesso!');
+        else
+            return redirect()
+                        ->back()
+                        ->with('error', 'Falha ao cadastrar Marca!');
     }
 
     /**

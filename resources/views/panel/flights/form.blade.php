@@ -19,8 +19,8 @@
 	{!! Form::time('time_duration', null, ['class'=>'form-control','placeholder'=>'Duração']) !!}
 </div>
 <div class="form-group">
-	<label for="time">Horas saída</label>
-	{!! Form::time('time', null, ['class'=>'form-control', 'placeholder'=>'Hora da saída']) !!}
+	<label for="hour_output">Horas saída</label>
+	{!! Form::time('hour_output', null, ['class'=>'form-control', 'placeholder'=>'Hora da saída']) !!}
 </div>
 <div class="form-group">
 	<label for="arrival_time">Horas Chegada</label>
@@ -39,7 +39,7 @@
 	{!! Form::text('total_plots', null, ['class'=>'form-control', 'Total de parcelas']) !!}
 </div>
 <div class="form-group">
-	{!! Form::checkbox('is_promotion', null, null, ['id'=>'is_promotion']) !!}
+	{!! Form::checkbox('is_promotion', true, null, ['id'=>'is_promotion']) !!}
 	<label for="is_promotion">É promoção</label>
 </div>
 <div class="form-group">
