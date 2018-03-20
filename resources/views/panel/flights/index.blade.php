@@ -58,8 +58,8 @@
             @forelse($flights as $flight)
                 <tr>
                     <td>{{ $flight->id }}</td>
-                    <td>{{ $flight->aiport_origin_id }}</td>
-                    <td>{{ $flight->aiport_destination_id }}</td>
+                    <td><a href="#">{{ $flight->origin->name }}</a></td>
+                    <td><a href="#">{{ $flight->destination->name }}</a></td>
                     <td>{{ $flight->qty_stops }}</td>
                     <td>{{ $flight->date }}</td>
                     <td>{{ $flight->hour_output }}</td>

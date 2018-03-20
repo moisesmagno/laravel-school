@@ -23,6 +23,10 @@ class Flight extends Model
     	'description'
     ];
 
+    public function getItens(){
+    	return $this->with(['origin','destination'])->paginate($this->totalPaginate);
+    }
+
     public function newFlight($request){
 
     	$data = $request->all();
@@ -31,5 +35,13 @@ class Flight extends Model
 
     	return $this->create($data);
 
+    }
+
+    public function origin(){
+    	return $this->belongsTo(Aiport::Class, 'aiport_origin_id');
+    }
+
+    public function destination(){
+    	return $this->belongsTo(Aiport::Class, 'aiport_destination_id');
     }
 }

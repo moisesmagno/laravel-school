@@ -31,7 +31,7 @@ class FlightController extends Controller
     {
         $title = "Lista de Voos";
 
-        $flights = $this->flight->paginate($this->totalPaginate);
+        $flights = $this->flight->getItens();
 
         return view('panel.flights.index', compact('title','flights'));
     }
