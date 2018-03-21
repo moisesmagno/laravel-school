@@ -88,7 +88,16 @@ class FlightController extends Controller
      */
     public function edit($id)
     {
-        //
+        $flight = $this->flight->find($id);
+
+        if(!$flight)
+            return redirect()->back();
+
+        $title = "Editar o voo $flight->id";
+        $planes = $this->plane->pluck('id','id');
+        $aiports = $this->aiport->pluck('name', 'id');
+
+        return view('panel.flights.edit', compact('title', 'flight', 'planes', 'aiports'));
     }
 
     /**
@@ -100,7 +109,16 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $flight = $this->flight->find($id);
+   
+        if(!$flight)
+            return redirect()->back();
+
+        if($flight->update($data))
+            return redirect()->route('flights.index')->with('success', 'Sucesso ao editar voo');
+        else
+            return redirect()->back()->with('error', 'Não foi possível editar o voo')->withInput();
     }
 
     /**
