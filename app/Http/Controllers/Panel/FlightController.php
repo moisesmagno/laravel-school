@@ -5,15 +5,21 @@ namespace App\Http\Controllers\Panel;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Flight;
+use App\Models\Aiport;
+use App\Models\Plane;
 
 class FlightController extends Controller
 {
     private $flight;
+    private $aiport;
+    private $plane;
     private $totalPaginate = 20;
 
-    public function __construct(Flight $flight)
+    public function __construct(Flight $flight, Aiport $aiport, Plane $plane)
     {
         $this->flight = $flight;
+        $this->aiport = $aiport;
+        $this->plane = $plane;
     }
 
     /**
@@ -25,7 +31,7 @@ class FlightController extends Controller
     {
         $title = "Lista de Voos";
 
-        $flights = $this->flight->paginate($this->totalPaginate);
+        $flights = $this->flight->getItens();
 
         return view('panel.flights.index', compact('title','flights'));
     }
@@ -37,7 +43,12 @@ class FlightController extends Controller
      */
     public function create()
     {
-        //
+        $title = "Cadastro de Voos";
+
+        $planes = $this->plane->pluck('id', 'id');
+        $aiports = $this->aiport->pluck('name', 'id');
+
+        return view('panel.flights.create', compact('title', 'planes', 'aiports'));
     }
 
     /**
@@ -48,7 +59,14 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if($this->flight->newFlight($request))
+            return redirect()
+                        ->route('flights.index')
+                        ->with('success', 'Cadastro realizado com sucesso!');
+        else
+            return redirect()
+                        ->back()
+                        ->with('error', 'Falha ao cadastrar Marca!');
     }
 
     /**
@@ -70,7 +88,16 @@ class FlightController extends Controller
      */
     public function edit($id)
     {
-        //
+        $flight = $this->flight->find($id);
+
+        if(!$flight)
+            return redirect()->back();
+
+        $title = "Editar o voo $flight->id";
+        $planes = $this->plane->pluck('id','id');
+        $aiports = $this->aiport->pluck('name', 'id');
+
+        return view('panel.flights.edit', compact('title', 'flight', 'planes', 'aiports'));
     }
 
     /**
@@ -82,7 +109,16 @@ class FlightController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $flight = $this->flight->find($id);
+   
+        if(!$flight)
+            return redirect()->back();
+
+        if($flight->update($data))
+            return redirect()->route('flights.index')->with('success', 'Sucesso ao editar voo');
+        else
+            return redirect()->back()->with('error', 'Não foi possível editar o voo')->withInput();
     }
 
     /**
