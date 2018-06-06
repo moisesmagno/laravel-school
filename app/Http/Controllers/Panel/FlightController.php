@@ -59,7 +59,20 @@ class FlightController extends Controller
      */
     public function store(Request $request)
     {
-        if($this->flight->newFlight($request))
+        $nameFile = null;
+
+        if($request->hasFile('image') && $request->file('image')->isValid()){
+            $nameFile = uniqid(date('HisYmd')).'.'.$request->image->extension();
+
+            if(!$request->image->storeAs('Fligs', $nameFile))
+                return redirect()
+                            ->back()
+                            ->with('error', 'Falha ao fazer upload da imagem');
+
+
+        }
+
+        if($this->flight->newFlight($request, $nameFile))
             return redirect()
                         ->route('flights.index')
                         ->with('success', 'Cadastro realizado com sucesso!');

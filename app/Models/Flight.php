@@ -27,9 +27,10 @@ class Flight extends Model
     	return $this->with(['origin','destination'])->paginate($this->totalPaginate);
     }
 
-    public function newFlight($request){
+    public function newFlight($request, $fileName){
 
     	$data = $request->all();
+    	$data['image'] = $fileName;
     	$data['aiport_origin_id'] = $request->origem;
     	$data['aiport_destination_id'] = $request->destination;
 
@@ -44,4 +45,7 @@ class Flight extends Model
     public function destination(){
     	return $this->belongsTo(Aiport::Class, 'aiport_destination_id');
     }
+
+
+
 }

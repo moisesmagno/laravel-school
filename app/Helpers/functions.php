@@ -6,3 +6,7 @@
  * Time: 18:33
  */
 
+    //Formata data e hora
+    function formatDateAndTime($value, $format = 'd/m/Y'){
+        return Carbon\Carbon::parse($value)->format($format);
+    }
